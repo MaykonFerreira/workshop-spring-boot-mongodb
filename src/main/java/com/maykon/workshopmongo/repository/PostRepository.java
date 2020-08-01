@@ -12,9 +12,11 @@ import com.maykon.workshopmongo.domain.Post;
 @Repository
 public interface PostRepository extends MongoRepository<Post, String> {
 
-	@Query("{ 'title': { $regex: ?0, $options: 'i' } }")
+	// Referencia para o mongoDB search é do BD e Title é o seu Titulo
+	@Query("{ 'title': { $regex: ?0, $options: 'i' } }") 
 	List<Post> searchTitle(String text);
 	
+	// Essa linha ela ignora Ucase e Lcase
 	List<Post> findByTitleContainingIgnoreCase(String text);
 	
 	@Query("{ $and: [ { date: {$gte: ?1} }, { date: { $lte: ?2} } , { $or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'body': { $regex: ?0, $options: 'i' } }, { 'comments.text': { $regex: ?0, $options: 'i' } } ] } ] }")
