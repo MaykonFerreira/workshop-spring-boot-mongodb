@@ -27,6 +27,7 @@ public class PostService {
 	}
 	
 	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+		// Aqui coloca uma data atual + 1 dia (calculos para acrescentar um dia )
 		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
 		return repo.fullSearch(text, minDate, maxDate);
 	}
