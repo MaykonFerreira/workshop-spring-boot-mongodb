@@ -1,12 +1,16 @@
 package com.maykon.workshopmongo.config;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.maykon.workshopmongo.domain.Post;
 import com.maykon.workshopmongo.domain.User;
+import com.maykon.workshopmongo.repository.PostRepository;
 import com.maykon.workshopmongo.repository.UserRepository;
 
 @Configuration
@@ -15,10 +19,14 @@ public class Instantiation implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
+	@Autowired
+	private PostRepository postRepository;	
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		userRepository.deleteAll();
 		
@@ -28,10 +36,12 @@ public class Instantiation implements CommandLineRunner {
 		User maykon = new User(null, "Maykon Ferreira", "maykon@gmail.com");
 		User ana = new User(null, "Ana Ferreira", "ana@gmail.com");
 				
-		userRepository.saveAll(Arrays.asList(maria,alex,bob,maykon,ana));
+		userRepository.saveAll(Arrays.asList(maria,alex,bob));
 		
+		Post p1 = new Post(null,sdf.parse("21/03/2020"),"Partiu Viagem", "Vou viajar para SP",maria);
+		Post p2 = new Post(null,sdf.parse("23/03/2020"),"Bom Dia", "Acordei Feliz Hoje",maria);
 		
-		
+		postRepository.saveAll(Arrays.asList(p1,p2));
 		
 		
 	}

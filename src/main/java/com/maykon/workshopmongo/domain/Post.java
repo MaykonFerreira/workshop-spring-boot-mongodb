@@ -15,18 +15,18 @@ import com.maykon.workshopmongo.dto.CommentDTO;
 public class Post implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id // Chave Primaria que Gera Automaticamente
 	private String id;
 	private Date date;
 	private String title;
 	private String body;
-	private AuthorDTO author;
+	private User author;
 	
 	private List<CommentDTO> comments = new ArrayList<>();
 	
 	public Post() {
 	}
-
+	/*
 	public Post(String id, Date date, String title, String body, AuthorDTO author) {
 		super();
 		this.id = id;
@@ -35,6 +35,15 @@ public class Post implements Serializable {
 		this.body = body;
 		this.author = author;
 	}
+	*/
+	public Post(String id, Date date, String title, String body, User author) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.title = title;
+		this.body = body;
+	
+	}	
 
 	public String getId() {
 		return id;
@@ -68,14 +77,24 @@ public class Post implements Serializable {
 		this.body = body;
 	}
 
-	public AuthorDTO getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(AuthorDTO author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
+//
+//	public AuthorDTO getAuthor() {
+//		return author;
+//	}
+//
+//	public void setAuthor(AuthorDTO author) {
+//		this.author = author;
+//	}
+	
+	
 	public List<CommentDTO> getComments() {
 		return comments;
 	}
