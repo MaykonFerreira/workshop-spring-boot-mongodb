@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.maykon.workshopmongo.domain.Post;
 import com.maykon.workshopmongo.domain.User;
+import com.maykon.workshopmongo.dto.AuthorDTO;
 import com.maykon.workshopmongo.repository.PostRepository;
 import com.maykon.workshopmongo.repository.UserRepository;
 
@@ -29,6 +30,7 @@ public class Instantiation implements CommandLineRunner {
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		userRepository.deleteAll();
+		postRepository.deleteAll();
 		
 		User maria = new User(null, "Maria Brown", "maria@gmail.com");
 		User alex = new User(null, "Alex Green", "alex@gmail.com");
@@ -38,8 +40,8 @@ public class Instantiation implements CommandLineRunner {
 				
 		userRepository.saveAll(Arrays.asList(maria,alex,bob));
 		
-		Post p1 = new Post(null,sdf.parse("21/03/2020"),"Partiu Viagem", "Vou viajar para SP",maria);
-		Post p2 = new Post(null,sdf.parse("23/03/2020"),"Bom Dia", "Acordei Feliz Hoje",maria);
+		Post p1 = new Post(null,sdf.parse("21/03/2020"),"Partiu Viagem", "Vou viajar para SP",new AuthorDTO(maria));
+		Post p2 = new Post(null,sdf.parse("23/03/2020"),"Bom Dia", "Acordei Feliz Hoje",new AuthorDTO(maria));
 		
 		postRepository.saveAll(Arrays.asList(p1,p2));
 		
