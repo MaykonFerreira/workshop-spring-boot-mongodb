@@ -39,4 +39,8 @@ public class UserService {
 		
 	}
 	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
 }
